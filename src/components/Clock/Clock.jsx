@@ -1,19 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import useClock from './useClock';
 
 function Clock() {
-  const [timeString, setTimeString] = useState('');
-
-  useEffect(() => {
-    const clockInterval = setInterval(() => {
-      const now = new Date();
-      const newTimeString = now.toLocaleTimeString();
-      setTimeString(newTimeString);
-    }, 1000);
-
-    return () => {
-      clearInterval(clockInterval);
-    };
-  }, []);
+  const { timeString } = useClock();
 
   return <div style={{ fontSize: 32 }}>{timeString}</div>;
 }
