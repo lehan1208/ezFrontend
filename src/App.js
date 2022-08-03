@@ -7,6 +7,7 @@ import queryString from 'query-string';
 import PostList from './components/PostList/PostList';
 import axios from 'axios';
 import Pagination from './components/Pagination/Pagination';
+import PostFilterForm from './components/PostFilterForm/PostFilterForm';
 
 function App() {
   const [todoList, setTodoList] = useState([
@@ -46,6 +47,14 @@ function App() {
     fetchData();
   }, [filter]);
 
+  const handleOnSubmitFilterChange = (searchFromValue) => {
+    setFilter({
+      ...filter,
+      _page: 1,
+      title_like: searchFromValue.searchTerm,
+    });
+  };
+
   const handleTodoClick = (todo) => {
     const index = todoList.findIndex((x) => x.id === todo.id);
     if (index !== -1) {
@@ -66,6 +75,7 @@ function App() {
       <h1>Hello World - POST LIST</h1>
       {/* <TodoForm onSubmit={handleOnSubmit} />
       <TodoList todos={todoList} onTodoClick={handleTodoClick} /> */}
+      <PostFilterForm onSubmit={handleOnSubmitFilterChange} />
       <PostList posts={postList} />
       <Pagination pagination={pagination} onPageChange={handlePageChange} />
     </div>
