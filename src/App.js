@@ -8,6 +8,7 @@ import PostList from './components/PostList/PostList';
 import axios from 'axios';
 import Pagination from './components/Pagination/Pagination';
 import PostFilterForm from './components/PostFilterForm/PostFilterForm';
+import Clock from './components/Clock/Clock';
 
 function App() {
   const [todoList, setTodoList] = useState([
@@ -25,6 +26,8 @@ function App() {
     _limit: 10,
     _page: 1,
   });
+
+  const [isShowClock, setIsShowClock] = useState(true);
 
   const handlePageChange = (newPage) => {
     setFilter({
@@ -74,10 +77,15 @@ function App() {
     <div className='app'>
       <h1>Hello World - POST LIST</h1>
       {/* <TodoForm onSubmit={handleOnSubmit} />
-      <TodoList todos={todoList} onTodoClick={handleTodoClick} /> */}
+      <TodoList todos={todoList} onTodoClick={handleTodoClick} />
       <PostFilterForm onSubmit={handleOnSubmitFilterChange} />
       <PostList posts={postList} />
-      <Pagination pagination={pagination} onPageChange={handlePageChange} />
+      <Pagination pagination={pagination} onPageChange={handlePageChange} /> */}
+      {isShowClock === true && <Clock />}
+      <button onClick={() => setIsShowClock(!isShowClock)}>
+        {isShowClock === true ? 'Hide Clock' : 'Show Clock'}
+      </button>
+      {/* <button onClick={() => setIsShowClock(true)}>Show Clock</button> */}
     </div>
   );
 }
